@@ -1,0 +1,637 @@
+/* ============================================================
+   Design tokens — "The Research Desk"
+   A dark ledger palette with a serif masthead and monospace
+   data readouts, evoking an analyst's research note rather
+   than a generic SaaS dashboard.
+   ============================================================ */
+:root {
+  --bg: #10151a;
+  --surface: #1a2129;
+  --surface-raised: #212a33;
+  --text-primary: #ece8df;
+  --text-secondary: #8b96a0;
+  --hairline: rgba(236, 232, 223, 0.12);
+  --accent-gold: #c9a227;
+  --accent-brick: #b3462c;
+  --accent-teal: #3e7c8c;
+  --accent-olive: #7a9e3c;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 20px 100px;
+}
+
+/* ---------- Header / masthead ---------- */
+header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  color: var(--accent-gold);
+  margin: 0 0 10px;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 34px;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+  max-width: 480px;
+  margin: 0 auto 22px;
+  line-height: 1.5;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-toggle button {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mode-toggle button.active {
+  background: var(--accent-gold);
+  color: #10151a;
+}
+
+/* ---------- Search / compare inputs ---------- */
+.search-bar,
+.compare-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.compare-inputs {
+  flex-wrap: wrap;
+}
+
+.search-bar input,
+.compare-inputs input {
+  flex: 1;
+  min-width: 180px;
+  padding: 13px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.search-bar input::placeholder,
+.compare-inputs input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-bar button,
+.compare-inputs button {
+  padding: 13px 24px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent-gold);
+  color: #10151a;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.search-bar button:disabled,
+.compare-inputs button:disabled {
+  background: #4a4a3d;
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* ---------- Timeline (numbered pipeline steps) ---------- */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeline li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.timeline-index {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  width: 20px;
+}
+
+.timeline li.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.timeline li.active .timeline-index {
+  color: var(--accent-gold);
+}
+
+.timeline li.done {
+  color: var(--accent-olive);
+}
+
+.timeline li.done .timeline-index {
+  color: var(--accent-olive);
+}
+
+.timeline-label {
+  flex: 1;
+}
+
+.spinner {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--hairline);
+  border-top-color: var(--accent-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-banner {
+  background: rgba(179, 70, 44, 0.15);
+  border: 1px solid var(--accent-brick);
+  color: #e8b8a8;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+/* ---------- Verdict card (the "stamped decision") ---------- */
+.verdict-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.verdict-ticker-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-raised);
+}
+
+.verdict-company {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.verdict-ticker {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.verdict-ticker .up {
+  color: var(--accent-olive);
+}
+
+.verdict-ticker .down {
+  color: var(--accent-brick);
+}
+
+.verdict-body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: start;
+  padding: 26px 24px;
+}
+
+.verdict-stamp {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  padding: 10px 16px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  transform: rotate(-5deg);
+  white-space: nowrap;
+  align-self: center;
+}
+
+.verdict-stamp.invest {
+  color: var(--accent-gold);
+}
+
+.verdict-stamp.pass {
+  color: var(--accent-brick);
+}
+
+.verdict-main {
+  min-width: 0;
+}
+
+.reasoning {
+  line-height: 1.65;
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pros-cons h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.pros-cons ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.55;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.verdict-confidence {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.confidence-ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.confidence-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.confidence-ring-number {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.confidence-ring-percent {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.confidence-caption {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+/* ---------- Chart grid: stock price + financial trend ---------- */
+.chart-grid,
+.gauge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stock-panel,
+.financial-panel,
+.gauge-panel {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.stock-panel-empty,
+.financial-panel-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.stock-ticker-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-mono);
+  margin-bottom: 8px;
+}
+
+.stock-symbol {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.stock-price {
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.stock-change.up {
+  color: var(--accent-olive);
+  font-size: 13px;
+}
+
+.stock-change.down {
+  color: var(--accent-brick);
+  font-size: 13px;
+}
+
+.stock-range-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.chart-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+}
+
+.financial-panel-header {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+/* ---------- Gauges (sentiment / risk) ---------- */
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.gauge-header span:first-child {
+  color: var(--text-secondary);
+}
+
+.gauge-label {
+  font-weight: 600;
+}
+
+.gauge-track {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.gauge-segment {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.gauge-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.gauge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.gauge-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------- Research dossier ---------- */
+.research-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.research-detail h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.export-btn {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.export-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.research-section {
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  padding: 13px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.section-body p {
+  margin: 0 0 1em;
+}
+
+.section-body p:last-child {
+  margin-bottom: 0;
+}
+
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-gold);
+}
+
+.section-title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.section-chevron {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.section-body {
+  padding: 0 16px 16px 44px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+/* ---------- Print / PDF export ---------- */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .verdict-card,
+  .stock-panel,
+  .financial-panel,
+  .gauge-panel,
+  .research-section {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    color: black !important;
+    break-inside: avoid;
+  }
+
+  .verdict-ticker-strip {
+    background: white !important;
+  }
+
+  .section-body {
+    display: block !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 680px) {
+  .pros-cons,
+  .chart-grid,
+  .gauge-grid,
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .verdict-body {
+    grid-template-columns: 1fr;
+  }
+
+  .verdict-stamp {
+    justify-self: start;
+  }
+}
